@@ -4,24 +4,11 @@ use onebone\minecombat\grenade\BaseGrenade;
 use onebone\minecombat\gun\BaseGun;
 use onebone\minecombat\gun\Bazooka;
 use onebone\minecombat\gun\FlameThrower;
-use pocketmine\Player;
-use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
-use pocketmine\level\Position;
-use pocketmine\level\Level;
-use pocketmine\command\CommandSender;
-use pocketmine\command\Command;
-use pocketmine\item\Item;
-use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\Player;use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerDeathEvent;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\event\player\PlayerDropItemEvent;
-use pocketmine\event\player\PlayerLoginEvent;
 use pocketmine\event\inventory\InventoryPickupItemEvent;
 use pocketmine\scheduler\AsyncTask;
 
@@ -500,19 +487,6 @@ class MineCombat extends PluginBase implements Listener{
 			
 		}
 		
-	}
-	public function onChat(PlayerChatEvent $event) {
-		$event->getHandlers()->bake();
-		$player = $event->getPlayer ();
-		$message = $event->getMessage ();
-		if($this->players[$player->getName()][2] === self::TEAM_RED){
-			$level = floor(($this->level[$player->getName()] / 100));
-			$event->setMessage (TextFormat::RED ."[레드팀]"."LV:".$level.">".TextFormat::RESET. $message );
-		}
-		if($this->players[$player->getName()][2] === self::TEAM_BLUE){
-			$level = floor(($this->level[$player->getName()] / 100));
-			$event->setMessage (TextFormat::BLUE."[블루팀]"."LV:".$level .">".TextFormat::RESET. $message );
-		}
 	}
 	public function onInteract(PlayerInteractEvent $event){
 		if($this->status === self::STAT_GAME_IN_PROGRESS){
